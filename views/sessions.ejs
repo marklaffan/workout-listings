@@ -1,0 +1,10 @@
+<h1>Sessions Page</h1>
+
+<% sessions.forEach(function(session){ %>
+    <div>
+        <h4><%= session.class_name %></h4>
+        <p>By <%= session.trainer %></p>
+        <img src="<%= session.image %>"/>
+    </div>
+<% }); %>
+
