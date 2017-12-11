@@ -2,15 +2,16 @@
 
 <h1>Sessions Page</h1>
 
+<p><a href="/sessions/new">Add a New Class</a></p>
+
 <% sessions.forEach(function(session){ %>
     <div>
         <h4><%= session.class_name %></h4>
-        <p>By <%= session.trainer %></p>
         <img src="<%= session.image %>"/>
     </div>
 <% }); %>
 
-<a href="/">Go back</a>
+<p><a href="/">Go back</a></p>
 
 <% include partials/footer %>
 
