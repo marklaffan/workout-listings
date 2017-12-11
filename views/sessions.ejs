@@ -1,3 +1,5 @@
+<% include partials/header %>
+
 <h1>Sessions Page</h1>
 
 <% sessions.forEach(function(session){ %>
@@ -7,4 +9,8 @@
         <img src="<%= session.image %>"/>
     </div>
 <% }); %>
+
+<a href="/">Go back</a>
+
+<% include partials/footer %>
 
