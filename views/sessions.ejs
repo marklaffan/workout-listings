@@ -1,17 +1,42 @@
 <% include partials/header %>
-
-<h1>Sessions Page</h1>
-
-<p><a href="/sessions/new">Add a New Class</a></p>
-
-<% sessions.forEach(function(session){ %>
-    <div>
-        <h4><%= session.class_name %></h4>
-        <img src="<%= session.image %>"/>
-    </div>
-<% }); %>
-
-<p><a href="/">Go back</a></p>
+    
+        <div class="row">
+            <div class="column">
+                <div class="ui message">
+                    <h1 class="ui header">Welcome to Workout Listings Ireland</h1>
+                    <p>Find and rate health and fitness classes all over Ireland.</p>
+                    <p><a class="ui primary button" href="/sessions/new">Add a New Class</a></p>
+                </div>
+            </div>
+        </div>
+        
+        <h4 class="ui horizontal divider header">
+          Classes
+        </h4>
+        
+        <div class="ui three column grid">
+  
+            <% sessions.forEach(function(session){ %><div class="column">
+                <div class="ui fluid card">
+                    <div class="image">
+                        <img src="<%= session.image %>"/>
+                    </div>
+                    <div class="content">
+                        <div class="header"><%= session.class_name %></div>
+                        <div class="meta">
+                            <a>by Trainer Name</a>
+                          </div>
+                    </div>
+                </div> </div> 
+            <% }); %>
+          
+        </div>
+ 
+    
+        
+        <p><a href="/">Go back</a></p>
+    
+    
 
 <% include partials/footer %>
 
