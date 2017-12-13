@@ -1,15 +1,28 @@
 <% include partials/header %>
 
-<h1>Add your class to Workout Listings Ireland</h1>
 
-<!--class_name: "Kettlebells", trainer: "Brian Byrne", image: "https://cdn.pixabay.com/photo/2017/02/09/16/29/kettlebell-2052775__340.jpg"-->
-<form action="/sessions" method="POST">
-    <input type="text" name="class_name" placeholder="name of your class">
-    <input type="text" name="image" placeholder="image url">
-    <button>Submit</button>
-</form>
+<h1 style="text-align: center;">Add your class to Workout Listings Ireland</h1><!-- GET RID OF INLINE STYLING -->
 
-<p><a href="/sessions">Go back</a></p>
+    <div style="width: 30%; margin: 25px auto;"><!-- GET RID OF INLINE STYLING -->
+        
+        <!--class_name: "Kettlebells", trainer: "Brian Byrne", image: "https://cdn.pixabay.com/photo/2017/02/09/16/29/kettlebell-2052775__340.jpg"-->
+        <form class="ui form" action="/sessions" method="POST">
+            <div class="field">
+                <input type="text" name="class_name" placeholder="name of your class">
+            </div>
+            <div class="field">
+                <input type="text" name="image" placeholder="image url">
+            </div>
+            <div class="field">
+                <button class="ui primary fluid ui button">Submit</button>
+            </div>
+        </form>
+        <br>
+        <p><a href="/sessions">Go back</a></p>
+    </div>
+    
+
+
 
 <% include partials/footer %>
 
