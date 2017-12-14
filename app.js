@@ -1,9 +1,17 @@
 var express = require("express"),
     app = express(),
-    bodyParser = require("body-parser");
+    bodyParser = require("body-parser"),
+    mongoose = require("mongoose");
     
+mongoose.connect("mongodb://localhost/workout_listings");
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
+
+// Schema Setup
+var workoutSchema = new mongoose.Schema({
+    class_name: String,
+    image: String
+});
 
 var sessions = [
         {class_name: "Kettlebells", image: "https://cdn.pixabay.com/photo/2017/02/09/16/29/kettlebell-2052775__340.jpg"},
