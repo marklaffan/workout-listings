@@ -5,7 +5,7 @@
                 <div class="ui message">
                     <h1 class="ui header">Welcome to Workout Listings Ireland</h1>
                     <p>Find and rate health and fitness classes all over Ireland.</p>
-                    <p><a class="ui primary button" href="/sessions/new">Add a New Class</a></p>
+                    <p><a class="ui primary button" href="/workouts/new">Add a New Class</a></p>
                 </div>
             </div>
         </div>
@@ -16,13 +16,13 @@
         
         <div class="ui three column grid">
   
-            <% sessions.forEach(function(session){ %><div class="column">
+            <% workouts.forEach(function(workout){ %><div class="column">
                 <div class="ui fluid card">
                     <div class="image">
-                        <img src="<%= session.image %>"/>
+                        <img src="<%= workout.image %>"/>
                     </div>
                     <div class="content">
-                        <div class="header"><%= session.class_name %></div>
+                        <div class="header"><%= workout.workout %></div>
                         <div class="meta">
                             <a>by Trainer Name</a>
                           </div>
