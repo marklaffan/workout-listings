@@ -2,22 +2,26 @@ var express = require("express"),
     app = express(),
     bodyParser = require("body-parser"),
     mongoose = require("mongoose");
-    
-mongoose.connect("mongodb://localhost/workout_listings");
+
+
+mongoose.connect("mongodb://localhost/workout_listings", {useMongoClient: true}); // useMongoClient: true removes warning on starting server
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 
 // Schema Setup
 var workoutSchema = new mongoose.Schema({
     workout: String,
-    image: String
+    image: String,
+    description: String
 });
 
 var Workout = mongoose.model("Workout", workoutSchema); 
 
 // Workout.create(
 //     {
-//         workout: "Pilates", image: "https://cdn.pixabay.com/photo/2017/01/03/07/52/weights-1948813__340.jpg"
+//         workout: "Kettlebells", 
+//         image: "https://cdn.pixabay.com/photo/2017/02/09/16/29/kettlebell-2052775__340.jpg",
+//         description: "Integer dapibus risus at nunc cursus pellentesque. Proin a ullamcorper tellus, et ornare augue. Nam ullamcorper vehicula eros sed aliquet. Praesent suscipit nunc sed eros pharetra porttitor. Vestibulum condimentum mattis aliquam. Vivamus auctor, orci sed fermentum interdum, leo tellus laoreet orci, sit amet finibus augue libero id diam. Cras non convallis dolor. In mattis felis vitae nisi ultrices congue. Donec dictum risus in tortor viverra convallis."
 //     }, function(err, workout){
 //         if(err) {
 //             console.log(err);
@@ -32,22 +36,25 @@ app.get("/", function(req, res){
     res.render("landing");
 });
 
+// Index - show all workouts
 app.get("/workouts", function(req, res){
     // Fetch all workouts from DB
     Workout.find({}, function(err, allWorkouts){
         if(err) {
             console.log(err);
         } else {
-            res.render("workouts", {workouts: allWorkouts});
+            res.render("index", {workouts: allWorkouts});
         }
     });
 });
 
+// Create - Add new workout to workouts
 app.post("/workouts", function(req, res){
     // Get data from form & add to sessions array
     var workout = req.body.workout;
     var image = req.body.image;
-    var newWorkout = {workout: workout, image: image};
+    var desc = req.body.description;
+    var newWorkout = {workout: workout, image: image, description: desc};
     // Create a new workout and save to DB
     Workout.create(newWorkout, function(err, newlyCreated) {
         if(err) {
@@ -56,12 +63,26 @@ app.post("/workouts", function(req, res){
             // Redirect back to classes / sessions page
             res.redirect("/workouts");
         }
-    })
-    
+    });
 });
 
+
+// New - Show form to create a new workout
 app.get("/workouts/new", function(req, res){
     res.render("new.ejs");
+});
+
+// Show - Show more info about the workout
+app.get("/workouts/:id", function(req, res) {
+    // Find workout by ID
+    Workout.findById(req.params.id, function(err, foundWorkout){
+        if(err){
+            console.log(err);
+        } else {
+            // Render show template with found workout
+            res.render("show", {workout: foundWorkout});
+        }
+    });
 });
 
 app.listen(process.env.PORT, process.env.IP, function(){

@@ -1,0 +1,53 @@
+<% include partials/header %>
+    
+        <div class="row">
+            <div class="column">
+                <div class="ui message">
+                    <h1 class="ui header">Welcome to Workout Listings Ireland</h1>
+                    <p>Find and rate health and fitness classes all over Ireland.</p>
+                    <p><a class="ui primary button" href="/workouts/new">Add a New Class</a></p>
+                </div>
+            </div>
+        </div>
+        
+        <h4 class="ui horizontal divider header">
+          Workouts
+        </h4>
+        
+        <div class="ui three column grid">
+  
+            <% workouts.forEach(function(workout){ %>
+                <div class="column">
+                    <div class="ui fluid card">
+                        <div class="image">
+                            <img src="<%= workout.image %>"/>
+                        </div>
+                        <div class="content">
+                            <span class="right floated">
+                                <div class="meta">
+                                    <a>by Trainer Name</a>
+                                </div>
+                            </span>
+                            <div class="header">
+                                <%= workout.workout %>
+                            </div>
+                        </div>
+                        <center>
+                            <p style="margin-bottom: 10px;"><!-- GET RID OF INLINE STYLING -->
+                                <a href="/workouts/<%= workout._id %>" class="ui primary button">More Info</a>
+                            </p>
+                        </center>
+                    </div> 
+                </div> 
+            <% }); %>
+          
+        </div>
+ 
+    
+        
+        <p><a href="/">Go back</a></p>
+    
+    
+
+<% include partials/footer %>
+
