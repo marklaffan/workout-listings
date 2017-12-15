@@ -5,6 +5,12 @@
     
     <p><%= workout.description %></p>
     
+    <% workout.comments.forEach(function(comment) { %>
+        <p>
+            <strong><%= comment.author %></strong> - <%= comment.text %>
+        </p>
+    <% }) %>
+    
     <p><a href="/workouts">Go back</a></p>
-
+    
 <% include partials/footer %>

@@ -1,35 +1,16 @@
-var express = require("express"),
-    app = express(),
-    bodyParser = require("body-parser"),
-    mongoose = require("mongoose");
+var express     = require("express"),
+    app         = express(),
+    bodyParser  = require("body-parser"),
+    mongoose    = require("mongoose"),
+    Workout     = require("./models/workout"),
+    Comment     = require("./models/comment"),
+    seedDB      = require("./seeds");
 
 
 mongoose.connect("mongodb://localhost/workout_listings", {useMongoClient: true}); // useMongoClient: true removes warning on starting server
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
-
-// Schema Setup
-var workoutSchema = new mongoose.Schema({
-    workout: String,
-    image: String,
-    description: String
-});
-
-var Workout = mongoose.model("Workout", workoutSchema); 
-
-// Workout.create(
-//     {
-//         workout: "Kettlebells", 
-//         image: "https://cdn.pixabay.com/photo/2017/02/09/16/29/kettlebell-2052775__340.jpg",
-//         description: "Integer dapibus risus at nunc cursus pellentesque. Proin a ullamcorper tellus, et ornare augue. Nam ullamcorper vehicula eros sed aliquet. Praesent suscipit nunc sed eros pharetra porttitor. Vestibulum condimentum mattis aliquam. Vivamus auctor, orci sed fermentum interdum, leo tellus laoreet orci, sit amet finibus augue libero id diam. Cras non convallis dolor. In mattis felis vitae nisi ultrices congue. Donec dictum risus in tortor viverra convallis."
-//     }, function(err, workout){
-//         if(err) {
-//             console.log(err);
-//         } else {
-//             console.log("Newly created workout: ");
-//             console.log(workout);
-//         }
-//     });
+seedDB();
 
 
 app.get("/", function(req, res){
@@ -75,7 +56,7 @@ app.get("/workouts/new", function(req, res){
 // Show - Show more info about the workout
 app.get("/workouts/:id", function(req, res) {
     // Find workout by ID
-    Workout.findById(req.params.id, function(err, foundWorkout){
+    Workout.findById(req.params.id).populate("comments").exec(function(err, foundWorkout){
         if(err){
             console.log(err);
         } else {
