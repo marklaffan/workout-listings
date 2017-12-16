@@ -1,19 +1,47 @@
+
+
 <% include ../partials/header %>
-    <h1><%= workout.workout %></h1>
-    
-    <img src="<%= workout.image %>">
-    
-    <p><%= workout.description %></p>
-    
-    <p>
-        <a class="ui inverted orange button" href="/workouts/<%= workout._id %>/comments/new">Add a Comment</a>
-    </p>
-    
-    <% workout.comments.forEach(function(comment) { %>
+<div class="ui two column stackable grid">
+  <div class="four wide column">
+        <!--<div class="ui segment">Content</div>-->
+        <h1>Workout Listings</h1>
+        <div class="ui segments">
+          <div class="ui segment">
+            <p>Top</p>
+          </div>
+          <div class="ui segment">
+            <p>Middle</p>
+          </div>
+          <div class="ui segment">
+            <p>Middle</p>
+          </div>
+        </div>
+        <p>MAP</p>
+    </div>
+    <div class="twelve wide column">
+        
+        <img class="ui fluid image" src="<%= workout.image %>">
+        <h4 style="float: right;">€25.00/class*</h4><!-- GET RID OF STYLE TAG -->
+        <h4><a><%= workout.workout %></a></h4>
+        <p><%= workout.description %></p>
+        
         <p>
-            <strong><%= comment.author %></strong> - <%= comment.text %>
+            <a class="ui right floated inverted orange button" href="/workouts/<%= workout._id %>/comments/new">Add a Comment</a>
         </p>
-    <% }) %>
+        
+        <% workout.comments.forEach(function(comment) { %>
+            <div class="ui grid">
+                <div class="sixteen wide column">
+                    <%= comment.author %>
+                    <span style="float: right;">10 days ago</span><!-- GET RID OF STYLE TAG -->
+                    <p><%= comment.text %></p>
+                </div>
+            </div>
+        <% }) %>
+        
+    </div>
+</div>
+    
     
     <p><a href="/workouts">Go back</a></p>
     
