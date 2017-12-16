@@ -24,7 +24,7 @@ app.get("/workouts", function(req, res){
         if(err) {
             console.log(err);
         } else {
-            res.render("index", {workouts: allWorkouts});
+            res.render("workouts/index", {workouts: allWorkouts});
         }
     });
 });
@@ -50,7 +50,7 @@ app.post("/workouts", function(req, res){
 
 // New - Show form to create a new workout
 app.get("/workouts/new", function(req, res){
-    res.render("new.ejs");
+    res.render("workouts/new");
 });
 
 // Show - Show more info about the workout
@@ -61,9 +61,49 @@ app.get("/workouts/:id", function(req, res) {
             console.log(err);
         } else {
             // Render show template with found workout
-            res.render("show", {workout: foundWorkout});
+            res.render("workouts/show", {workout: foundWorkout});
         }
     });
+});
+
+// ===============
+// COMMENTS ROUTES
+// ===============
+
+// New - Show form to create a new comment
+app.get("/workouts/:id/comments/new", function(req, res){
+    // Find workout by ID
+    Workout.findById(req.params.id, function(err, workout){
+        if(err){
+            console.log(err);
+        } else {
+            res.render("comments/new", {workout: workout});
+        }
+    });
+});
+
+// Create - Add new workout to workouts
+app.post("/workouts/:id/comments", function(req, res){
+    // Lookup workout by ID
+    Workout.findById(req.params.id, function(err, workout) {
+        if(err){
+            console.log(err);
+            res.redirect("/workouts");
+        } else {
+            Comment.create(req.body.comment, function(err, comment) {
+                if(err){
+                    console.log(err);
+                } else {
+                    workout.comments.push(comment);
+                    workout.save();
+                    res.redirect('/workouts/' + workout._id);
+                }
+            });
+        }
+    });
+    // Create new comment
+    // Connectcomment to workout
+    // Redirect to workout page
 });
 
 app.listen(process.env.PORT, process.env.IP, function(){
