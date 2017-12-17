@@ -19,7 +19,7 @@ mongoose.connect("mongodb://localhost/workout_listings", {useMongoClient: true})
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
-seedDB();
+// seedDB();  // Seed the DB
 
 // Passport Config
 app.use(require("express-session")({
