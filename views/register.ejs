@@ -1,0 +1,24 @@
+<% include ./partials/header %>
+<h1 class="formHeaders">Sign up to Workout Listings</h1>
+
+<div class="formStyles">
+        
+    <form class="ui form"  action="/register" method="post">
+        <div class="field">
+            <input type="text" name="username" placeholder="username">
+        </div>
+        <div class="field">
+            <input type="password" name="password" placeholder="password">
+        </div>
+        <div class="field">
+            <button class="ui primary fluid ui button">Register</button>
+        </div>
+    </form>
+</div>
+    
+<p><a href="/workouts">Go back</a></p>
+
+<% include ./partials/footer %>
+
+
+

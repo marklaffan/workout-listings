@@ -11,8 +11,13 @@
                 <div class="header item">Workout Listings</div>
                 <a href="/" class="item">Link</a>
                 <div class="right menu">
-                    <a class="item">Sign Up</a>
-                    <a class="item">Login</a>
+                    <% if(!currentUser) { %>
+                        <a class="item" href="/login">Login</a>
+                        <a class="item" href="/register">Sign Up</a>
+                    <% } else { %>
+                        <a class="item" href="#">Hi <%= currentUser.username %></a>
+                        <a class="item" href="/logout">Logout</a>
+                    <% } %>
                 </div>
             </div>
         

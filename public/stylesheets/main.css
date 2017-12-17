@@ -1,0 +1,25 @@
+body {
+    background-color: lightgrey;
+}
+
+a {
+    color: orange;
+}
+
+a:hover {
+    color: darkorange;
+}
+
+.formStyles {
+     width: 30%; 
+     margin: 25px auto;
+}
+
+.formHeaders {
+     text-align: center;
+}
+
+/*Adding a margin to the bottom of the more info icons in the workout cards*/
+#moreInfo {
+    margin-bottom: 10px;
+}

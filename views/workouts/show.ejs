@@ -1,43 +1,73 @@
 
 
 <% include ../partials/header %>
-<div class="ui two column stackable grid">
+<div class="ui  mobile reversed two column stackable grid">
   <div class="four wide column">
-        <!--<div class="ui segment">Content</div>-->
-        <h1>Workout Listings</h1>
-        <div class="ui segments">
-          <div class="ui segment">
-            <p>Top</p>
-          </div>
-          <div class="ui segment">
-            <p>Middle</p>
-          </div>
-          <div class="ui segment">
-            <p>Middle</p>
+      <!--<div class="ui segment">Content</div>-->
+      <h1>Workout Listings</h1>
+      <div class="ui segments">
+        <div class="ui segment">
+          <p>Top</p>
+        </div>
+        <div class="ui segment">
+          <p>Middle</p>
+        </div>
+        <div class="ui segment">
+          <p>Middle</p>
+        </div>
+      </div>
+      <p>MAP</p>
+  </div>
+  <div class="twelve wide column">
+      <div class="row">
+        <div style="max-width: 650px;" class="ui fluid card"><!-- REFACTOR style="max-width: 650px;" -->
+          <img class="ui fluid image" src="<%= workout.image %>">
+          <div class="content">
+            <h3><a><%= workout.workout %></a>
+            <span class="right floated">€25.00/class*</span></h3><!-- GET RID OF STYLE TAG -->
+            
+            <p><%= workout.description %></p>
           </div>
         </div>
-        <p>MAP</p>
-    </div>
-    <div class="twelve wide column">
-        
-        <img class="ui fluid image" src="<%= workout.image %>">
-        <h4 style="float: right;">€25.00/class*</h4><!-- GET RID OF STYLE TAG -->
-        <h4><a><%= workout.workout %></a></h4>
-        <p><%= workout.description %></p>
-        
-        <p>
+      </div>
+        <div style="max-width: 620px;" class="ui inverted divider"></div><!-- REFACTOR style="max-width: 650px;" -->
+
+      <div class="row">
+        <div  style="max-width: 650px;" class="ui secondary segment"><!-- REFACTOR style="max-width: 650px;" -->
+          <p style="padding-bottom: 30px;">
             <a class="ui right floated inverted orange button" href="/workouts/<%= workout._id %>/comments/new">Add a Comment</a>
-        </p>
-        
-        <% workout.comments.forEach(function(comment) { %>
-            <div class="ui grid">
-                <div class="sixteen wide column">
-                    <%= comment.author %>
-                    <span style="float: right;">10 days ago</span><!-- GET RID OF STYLE TAG -->
-                    <p><%= comment.text %></p>
+          </p>
+          <div class="ui inverted divider"></div>
+          
+          <div style="margin-top: 20px;" class="ui comments">
+            <% workout.comments.forEach(function(comment) { %>
+              <div class="comment">
+                <a class="avatar">
+                  <img src="https://cdn.pixabay.com/photo/2017/02/21/08/12/filter-2085021__340.jpg">
+                </a>
+                <div class="content">
+                  <a class="author"><%= comment.author %></a>
+                  <div class="metadata">
+                    <div class="date">2 days ago</div>
+                  </div>
+                  <div class="text">
+                    <%= comment.text %>
+                  </div>
+                  <div class="actions">
+                    <a class="reply">Reply</a>
+                  </div>
                 </div>
-            </div>
-        <% }) %>
+              </div>
+            <% }) %>   
+          </div>
+        </div>
+        
+        
+        
+      </div>
+        
+        
+        
         
     </div>
 </div>
