@@ -27,3 +27,7 @@ a:hover {
 #delete-form {
     display: inline;
 }
+
+.content {
+    margin-bottom: 1em;
+}

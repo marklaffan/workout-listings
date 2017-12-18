@@ -58,7 +58,11 @@ router.get("/:id", function(req, res) {
 // Edit Workout
 router.get("/:id/edit", checkWorkoutOwnership, function(req, res){
     Workout.findById(req.params.id, function(err, foundWorkout) {
-        res.render("workouts/edit", {workout: foundWorkout});
+        if(err) {
+            console.log(err);
+        } else {
+            res.render("workouts/edit", {workout: foundWorkout});
+        }
     });
 });
 
