@@ -47,6 +47,7 @@ router.get("/logout", function(req, res){
    res.redirect("/workouts");
 });
 
+// Middleware
 function isLoggedIn(req, res, next){
     if(req.isAuthenticated()){
         return next();

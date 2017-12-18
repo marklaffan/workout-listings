@@ -25,8 +25,14 @@
           <div class="content">
             <h3><a><%= workout.workout %></a>
             <span class="right floated">€25.00/class*</span></h3><!-- GET RID OF STYLE TAG -->
-            
             <p><%= workout.description %></p>
+            <p><em>Trainer: <%= workout.author.username %></em></p>
+            <% if(currentUser && workout.author.id.equals(currentUser._id)) { %>
+              <form id="delete-form" action="/workouts/<%= workout._id %>?_method=DELETE" method="POST">
+                <button class="tiny ui right floated red button">Delete</button>
+              </form>
+              <a class="tiny ui right floated orange button" href="/workouts/<%= workout._id %>/edit">Edit</a>
+            <% } %>
           </div>
         </div>
       </div>
