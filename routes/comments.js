@@ -65,7 +65,16 @@ router.put("/:comment_id", function(req, res) {
 });
 
 // Destroy Comment
-
+router.delete("/:comment_id", function(req, res) {
+    // findByIdAndRemove
+    Comment.findByIdAndRemove(req.params.comment_id, function(err){
+        if(err){
+            res.redirect("back");
+        } else {
+            res.redirect("/workouts/" + req.params.id);
+        }
+    });
+});
 
 // Middleware
 function isLoggedIn(req, res, next){
