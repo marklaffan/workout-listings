@@ -38,11 +38,6 @@ middlewareObj.checkWorkoutOwnership = function(req, res, next){
                 req.flash("error", "Unable to find Workout");
                 res.redirect("back");
             } else {
-                // Added this block, to check if foundWorkout exists
-                if(!foundWorkout) {
-                    req.flash("error", "Workout not found");
-                    return res.redirect("back");
-                }
                 // Check if user owns workout
                 if(foundWorkout.author.id.equals(req.user._id)) {     // .equals() - MONGOOSE METHOD
                     next();

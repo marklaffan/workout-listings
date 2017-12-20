@@ -47,11 +47,6 @@ router.post("/", middleware.isLoggedIn, function(req, res){
 // Edit Comment
 router.get("/:comment_id/edit", middleware.checkCommentOwnership, function(req, res){
     Comment.findById(req.params.comment_id, function(err, foundComment) {
-        // Added this block, to check if foundComment exists
-        if(!foundComment) {
-            req.flash("error", "Comment not found");
-            return res.redirect("back");
-        }
         if(err) {
             res.redirect("back");
         } else {
@@ -64,11 +59,6 @@ router.get("/:comment_id/edit", middleware.checkCommentOwnership, function(req, 
 // Update Comment
 router.put("/:comment_id", middleware.checkCommentOwnership, function(req, res) {
     Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, function(err, updatedComment){
-        // Added this block, to check if updated Comment exists
-        if(!updatedComment) {
-            req.flash("error", "Comment not found");
-            return res.redirect("back");
-        }
         if(err) {
             res.rediret("back");
         } else {
