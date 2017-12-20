@@ -8,7 +8,7 @@
     <body>
         <div class="ui fixed inverted menu">
             <div class="ui container">
-                <div class="header item">Workout Listings</div>
+                <div class="header item"><a href="/workouts">Workout Listings</a></div>
                 <a href="/" class="item">Link</a>
                 <div class="right menu">
                     <% if(!currentUser) { %>
@@ -24,4 +24,19 @@
         </div>
                         <!--REMOVE THIS HARDCODED STYLING-->
             <div class="ui container" style="margin-top: 4em;">
-    
+            <% if(error && error.length > 0) { %>
+            <div class="ui negative message">
+              <!--<i class="close icon"></i>-->
+              <div class="header">
+                <%= error %>
+              </div>
+            </div>
+            <% } %>
+            <% if(success && success.length > 0) { %>
+            <div class="ui success message">
+              <!--<i class="close icon"></i>-->
+              <div class="header">
+                <%= success %>
+              </div>
+            </div>
+            <% } %>

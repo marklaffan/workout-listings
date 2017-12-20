@@ -16,7 +16,7 @@ router.get("/new", middleware.isLoggedIn, function(req, res){
     });
 });
 
-// Create - Add new workout to workouts
+// Create - Add new comment to workouts
 router.post("/", middleware.isLoggedIn, function(req, res){
     // Lookup workout by ID
     Workout.findById(req.params.id, function(err, workout) {
@@ -26,6 +26,7 @@ router.post("/", middleware.isLoggedIn, function(req, res){
         } else {
             Comment.create(req.body.comment, function(err, comment) {
                 if(err){
+                    req.flash("error", "Something went wrong");
                     console.log(err);
                 } else {
                     // Add username & ID to comment
@@ -35,6 +36,7 @@ router.post("/", middleware.isLoggedIn, function(req, res){
                     comment.save();
                     workout.comments.push(comment);
                     workout.save();
+                    req.flash("success", "Your comment has been added.");
                     res.redirect('/workouts/' + workout._id);
                 }
             });
@@ -60,6 +62,7 @@ router.put("/:comment_id", middleware.checkCommentOwnership, function(req, res) 
         if(err) {
             res.rediret("back");
         } else {
+            req.flash("success", "Comment successfully deleted.");
             res.redirect("/workouts/" + req.params.id);
         }
     });
@@ -72,6 +75,7 @@ router.delete("/:comment_id", middleware.checkCommentOwnership, function(req, re
         if(err){
             res.redirect("back");
         } else {
+            req.flash("success", "Comment successfully deleted.");
             res.redirect("/workouts/" + req.params.id);
         }
     });

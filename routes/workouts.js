@@ -31,6 +31,7 @@ router.post("/", middleware.isLoggedIn, function(req, res){
         if(err) {
             console.log(err);
         } else {
+            req.flash("success", "Congradulations, your workout has been added to Worklout Listings Ireland.");
             // Redirect back to classes / sessions page
             res.redirect("/workouts");
         }
@@ -75,6 +76,7 @@ router.put("/:id", middleware.checkWorkoutOwnership, function(req, res){
         if(err){
             res.redirect("/workouts");
         } else {
+            req.flash("success", "Your workout has been successfully updated.");
             res.redirect("/workouts/" + req.params.id);
         }
     });
@@ -86,6 +88,7 @@ router.delete("/:id", middleware.checkWorkoutOwnership, function(req, res){
         if(err){
             res.redirect("/workouts");
         } else {
+            req.flash("success", "Your workout has been successfully deleted.");
             res.redirect("/workouts");
         }
     });
