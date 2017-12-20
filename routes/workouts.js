@@ -51,6 +51,11 @@ router.get("/:id", function(req, res) {
         if(err){
             console.log(err);
         } else {
+            // Added this block, to check if foundWorkout exists
+            if(!foundWorkout) {
+                req.flash("error", "Workout not found");
+                return res.redirect("back");
+            }
             // Render show template with found workout
             res.render("workouts/show", {workout: foundWorkout});
         }
@@ -60,6 +65,11 @@ router.get("/:id", function(req, res) {
 // Edit Workout
 router.get("/:id/edit", middleware.checkWorkoutOwnership, function(req, res){
     Workout.findById(req.params.id, function(err, foundWorkout) {
+        // Added this block, to check if foundWorkout exists
+        if(!foundWorkout) {
+            req.flash("error", "Workout not found");
+            return res.redirect("back");
+        }
         if(err) {
             console.log(err);
         } else {
@@ -73,6 +83,11 @@ router.get("/:id/edit", middleware.checkWorkoutOwnership, function(req, res){
 router.put("/:id", middleware.checkWorkoutOwnership, function(req, res){
     // Find & update the correct workout
     Workout.findByIdAndUpdate(req.params.id, req.body.workout, function(err, updatedWorkout){
+        // Added this block, to check if foundWorkout exists
+        if(!updatedWorkout) {
+            req.flash("error", "Workout not found");
+            return res.redirect("back");
+        }
         if(err){
             res.redirect("/workouts");
         } else {
