@@ -48,8 +48,9 @@ router.get("/new", middleware.isLoggedIn, function(req, res){
 router.get("/:id", function(req, res) {
     // Find workout by ID
     Workout.findById(req.params.id).populate("comments").exec(function(err, foundWorkout){
-        if(err){
-            console.log(err);
+        if(err || !foundWorkout){
+            req.flash("error", "Workout not found");
+            res.redirect("back");
         } else {
             // Render show template with found workout
             res.render("workouts/show", {workout: foundWorkout});

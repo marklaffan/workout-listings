@@ -46,12 +46,18 @@ router.post("/", middleware.isLoggedIn, function(req, res){
 
 // Edit Comment
 router.get("/:comment_id/edit", middleware.checkCommentOwnership, function(req, res){
-    Comment.findById(req.params.comment_id, function(err, foundComment) {
-        if(err) {
-            res.redirect("back");
-        } else {
-            res.render("comments/edit", {workout_id: req.params.id, comment: foundComment});
+    Workout.findById(req.params.id, function(err, foundWorkout) {
+        if(err || !foundWorkout) {
+            req.flash("error", "No workout found");
+            return res.redirect("back");
         }
+        Comment.findById(req.params.comment_id, function(err, foundComment) {
+            if(err) {
+                res.redirect("back");
+            } else {
+                res.render("comments/edit", {workout_id: req.params.id, comment: foundComment});
+            }
+        });
     });
 });
 
